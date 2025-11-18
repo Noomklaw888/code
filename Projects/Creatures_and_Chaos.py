@@ -1,5 +1,7 @@
+#Imports
 import random
 
+#Variable definitions
 MAP_SIZE = 5
 
 player_x = 0
@@ -9,11 +11,11 @@ player_hp = 20
 gold = 0
 potions = 0
 
-room_types = ["special", "special", "monster", "treasure"]
+room_types = ["special", "merchant", "monster", "treasure"]
 
 dungeon = []
 
-monsters = ["GenericBeast", "Iron Worm", "Evil Clippy the Crab", "Hammertail", "Crazy Cuboid"]#choose a monster
+monsters = ["GenericBeast", "Iron Worm", "Evil Clippy the Crab", "Hammertail", "Crazy Cuboid"]#
 
 SillyStuff = ["You see an empty room. *Chilly Silence*",
               "You see a strange green 2 legged lizard thingy singing karaoke in a screechy voice to a red drill tail lizard thingy and a blue dorsal fin lizard thingy. \"Spongebob Squarepants, Spongebob Squarepants...\"",
@@ -22,7 +24,7 @@ SillyStuff = ["You see an empty room. *Chilly Silence*",
               "You see a boxing ring with a tied up person, a nervous person, and a chicken. There is a crate above the chicken. You run out of the room before someone makes a joke aout chicken jockeys.",
               "You see Mickey Mouse petting his dog.",
               "You see a mine full of strange red 2 leg drill tail lizards thingies mining rare minerals and crystals."]
-
+names = ["Bob", "Joe", "Mary", "N00mk1@w", "Bonniebunny777", "Silly Billy"]
 for i in range(MAP_SIZE):
     row = []
     for j in range(MAP_SIZE):
@@ -30,6 +32,8 @@ for i in range(MAP_SIZE):
     dungeon.append(row)
 
 dungeon[0][0] = "special"
+
+
 
 def print_position():
     print(f"\nYou are now at room ({player_x + 1}, {player_y + 1})")#Change Xy display
@@ -39,6 +43,8 @@ def print_position():
         start_battle()
     elif room == "treasure":
         collect_treasure()
+    elif room == "merchant":
+        merch()
     else:
         sillything = SillyStuff[random.randint(0, len(SillyStuff)-1)]
         print(sillything)
@@ -117,8 +123,28 @@ def use_potion():
     potions -= 1
     print(f"You heal for {heal}! HP: {player_hp}, Potions left: {potions}")
 
-print("Welcome to Dungeon Explorer!")
+def merch():#Merchants
+    global gold, potions#IMPORTANT!!!
+    merchantname = names[random.randint(1, 5)]
+    price = random.randint(2, 10)
+    print(f"A merchant named {merchantname} walks to you and offers you a healing potion for {price} gold")
+    wannit = input("Accept or Decline?(a, other)").upper()
+    if wannit == "A":
+        if gold >= price:
+            potions += 1
+            gold = gold - price
+            print(f"You buy the potion! Total potions: {potions}")
+        else:
+            print("you don't have enough gold!")
+    else:
+        print(f"You decline {merchantname}'s offer.")
+
+def showstats():
+    print(f"Your HP: {player_hp} Your Potions: {potions} Your Gold: {gold}")
+
+print("Welcome to Creatures & Chaos!")
 print("Move with W A S D.")
+print("Press I to show stats.")
 print(f"Your HP: {player_hp}")
 print_position()
 
@@ -127,6 +153,7 @@ while True:
     if command in ["W", "A", "S", "D"]:
         move(command)
     elif command == "I":
-        print(f"HP: {player_hp}, Gold: {gold}, Potions: {potions}")
+        showstats()
     else:
         print("Invalid command!")
+
