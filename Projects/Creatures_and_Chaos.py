@@ -11,7 +11,7 @@ player_hp = 20
 gold = 0
 potions = 0
 
-room_types = ["special", "merchant", "monster", "treasure"]
+room_types = ["fun", "merchant", "monster", "treasure"]
 
 dungeon = []
 
@@ -31,7 +31,7 @@ for i in range(MAP_SIZE):
         row.append(random.choice(room_types))
     dungeon.append(row)
 
-dungeon[0][0] = "special"
+dungeon[0][0] = "fun"
 
 
 
@@ -74,10 +74,10 @@ def collect_treasure():
     else:
         potions += 1
         print(f"You found a healing potion! Total potions: {potions}")
-    dungeon[player_y][player_x] = "empty"
+    dungeon[player_y][player_x] = "fun"
 
 def start_battle():
-    global player_hp
+    global player_hp, gold
     monster_hp = random.randint(5, 15)#Choose HP
     mtype = monsters[random.randint(0, len(monsters)-1)] #Choose monster
     print(f"\nA(n) {mtype} appears with {monster_hp} HP!")
@@ -92,7 +92,9 @@ def start_battle():
             
             if monster_hp <= 0:
                 print(f"You defeated the {mtype}!")
-                dungeon[player_y][player_x] = "empty"
+                print(f"You got {abs(monster_hp) + 2} gold!")
+                gold += monster_hp
+                dungeon[player_y][player_x] = "fun"
                 return
             
             mdmg = random.randint(2, 6)
@@ -135,7 +137,7 @@ def merch():#Merchants
             gold = gold - price
             print(f"You buy the potion! Total potions: {potions}")
         else:
-            print("you don't have enough gold!")
+            print("You don't have enough gold!")
     else:
         print(f"You decline {merchantname}'s offer.")
 
@@ -156,4 +158,3 @@ while True:
         showstats()
     else:
         print("Invalid command!")
-
