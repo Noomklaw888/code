@@ -1,5 +1,6 @@
  #Imports
 import random
+import turtle as tom
 
 #Variable definitions
 MAP_SIZE = 5
@@ -24,7 +25,9 @@ SillyStuff = ["You see an empty room. *Chilly Silence*",
               "You see a boxing ring with a tied up person, a nervous person, and a chicken. There is a crate above the chicken. You run out of the room before someone makes a joke aout chicken jockeys.",
               "You see Mickey Mouse petting his dog.",
               "You see a mine full of strange red 2 leg drill tail lizards thingies mining rare minerals and crystals."]
+
 names = ["Bob", "Joe", "Mary", "N00mk1@w", "Bonniebunny777", "Silly Billy", "Question Mark"]
+
 for i in range(MAP_SIZE):
     row = []
     for j in range(MAP_SIZE):
@@ -146,6 +149,24 @@ def merch():#Merchants
 def showstats():
     print(f"PLAYER STATS\n –*–*–*–*–*–*–*–*–*–*–\nHP: {player_hp}\nPotions: {potions}\nGold: {gold}")
 
+
+
+    
+#Start the game
+tom.color("Dark Red")
+tom.bgcolor("Black")
+tom.right(90)
+tom.write("Creatures & Chaos", align='center', font=("Arial", 40, 'bold'))
+tom.forward(25)
+tom.write("Welcome to Creatures & Chaos!", align='center', font=("Arial", 20, 'bold'))
+tom.forward(25)
+tom.write("Move with W A S D.", align='center', font=("Arial", 20, 'bold'))
+tom.forward(25)
+tom.write("Press I to show stats.", align='center', font=("Arial", 20, 'bold'))
+tom.forward(25)
+tom.write("Play in python shell but don't close this window.", align='center', font=("Arial", 10, 'bold'))
+tom.forward(100)
+
 print("Welcome to Creatures & Chaos!")
 print("Move with W A S D.")
 print("Press I to show stats.")
@@ -160,3 +181,4 @@ while True:
         showstats()
     else:
         print("Invalid command!")
+
