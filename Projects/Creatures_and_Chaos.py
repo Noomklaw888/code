@@ -1,4 +1,4 @@
-#Imports
+ #Imports
 import random
 
 #Variable definitions
@@ -24,7 +24,7 @@ SillyStuff = ["You see an empty room. *Chilly Silence*",
               "You see a boxing ring with a tied up person, a nervous person, and a chicken. There is a crate above the chicken. You run out of the room before someone makes a joke aout chicken jockeys.",
               "You see Mickey Mouse petting his dog.",
               "You see a mine full of strange red 2 leg drill tail lizards thingies mining rare minerals and crystals."]
-names = ["Bob", "Joe", "Mary", "N00mk1@w", "Bonniebunny777", "Silly Billy"]
+names = ["Bob", "Joe", "Mary", "N00mk1@w", "Bonniebunny777", "Silly Billy", "Question Mark"]
 for i in range(MAP_SIZE):
     row = []
     for j in range(MAP_SIZE):
@@ -79,6 +79,7 @@ def collect_treasure():
 def start_battle():
     global player_hp, gold
     monster_hp = random.randint(5, 15)#Choose HP
+    maxmonster_hp = monster_hp
     mtype = monsters[random.randint(0, len(monsters)-1)] #Choose monster
     print(f"\nA(n) {mtype} appears with {monster_hp} HP!")
     
@@ -92,8 +93,9 @@ def start_battle():
             
             if monster_hp <= 0:
                 print(f"You defeated the {mtype}!")
-                print(f"You got {abs(monster_hp) + 2} gold!")
-                gold += monster_hp
+                print(f"You got {maxmonster_hp - 3} gold!")
+
+                gold += maxmonster_hp - 3
                 dungeon[player_y][player_x] = "fun"
                 return
             
@@ -142,7 +144,7 @@ def merch():#Merchants
         print(f"You decline {merchantname}'s offer.")
 
 def showstats():
-    print(f"Your HP: {player_hp} Your Potions: {potions} Your Gold: {gold}")
+    print(f"PLAYER STATS\n –*–*–*–*–*–*–*–*–*–*–\nHP: {player_hp}\nPotions: {potions}\nGold: {gold}")
 
 print("Welcome to Creatures & Chaos!")
 print("Move with W A S D.")
