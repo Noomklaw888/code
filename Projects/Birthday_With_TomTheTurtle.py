@@ -1,6 +1,6 @@
 import turtle as tom
 import random
-
+#to see more turtle stuff, visit my other repository at https://github.com/Noomklaw888/TurtleFunctions
 tom.clearscreen() #clear the screen
 
 tom.colormode(225)
